@@ -1,5 +1,5 @@
 import datetime
-import demjson
+import demjson3 as demjson
 import numpy as np
 import re
 from sqlalchemy import desc
@@ -285,7 +285,7 @@ class JobExecution(Base):
         result = {}
         iteration = {}
         for job_execution in JobExecution.query.filter_by(project_id=project_id).order_by(desc(JobExecution.id)).limit(100).all():
-            
+
             dico = job_execution.to_dict()
             # Errors, Retry, Exceptions, Bytes, Cache Size
             stream = np.array([ dico['errors_count'], dico['retries_count'], dico['exceptions_count'],
